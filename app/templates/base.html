@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}Ticket de Turno{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<nav class="nav">
+  <a class="marca" href="{{ url_for('public.solicitud') }}">Ticket de Turno</a>
+  <button class="burger" id="burger" aria-label="Menú">☰</button>
+  <ul id="menu">
+    {% if session.get('admin_id') %}
+      <li><a href="{{ url_for('admin.dashboard') }}">Dashboard</a></li>
+      <li><a href="{{ url_for('admin.solicitudes') }}">Solicitudes</a></li>
+      <li><a href="{{ url_for('admin.catalogo', tipo='municipios') }}">Municipios</a></li>
+      <li><a href="{{ url_for('admin.catalogo', tipo='niveles') }}">Niveles</a></li>
+      <li><a href="{{ url_for('admin.catalogo', tipo='asuntos') }}">Asuntos</a></li>
+      <li>
+        <form method="post" action="{{ url_for('auth.logout') }}">
+          <button class="link" type="submit">Cerrar sesión ({{ session.get('admin_nombre') }})</button>
+        </form>
+      </li>
+    {% else %}
+      <li><a href="{{ url_for('public.solicitud') }}">Solicitar turno</a></li>
+      <li><a href="{{ url_for('public.modificar') }}">Modificar turno</a></li>
+      <li><a href="{{ url_for('auth.login') }}">Acceso administrador</a></li>
+    {% endif %}
+  </ul>
+</nav>
+<main class="contenedor">
+  {% with mensajes = get_flashed_messages(with_categories=true) %}
+    {% for cat, m in mensajes %}<div class="flash {{ cat }}">{{ m }}</div>{% endfor %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

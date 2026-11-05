@@ -1,0 +1,77 @@
+<form id="form-ticket" novalidate>
+  <fieldset>
+    <legend>Datos de quien realiza el trámite</legend>
+    <div class="campo full">
+      <label for="nombre_completo">Nombre completo</label>
+      <input id="nombre_completo" name="nombre_completo" type="text">
+      <small class="error"></small>
+    </div>
+    <div class="campo full">
+      <label for="curp">CURP del alumno</label>
+      <input id="curp" name="curp" type="text" maxlength="18" placeholder="18 caracteres">
+      <small class="error"></small>
+    </div>
+    <div class="campo">
+      <label for="nombre">Nombre del alumno</label>
+      <input id="nombre" name="nombre" type="text">
+      <small class="error"></small>
+    </div>
+    <div class="campo">
+      <label for="paterno">Apellido paterno</label>
+      <input id="paterno" name="paterno" type="text">
+      <small class="error"></small>
+    </div>
+    <div class="campo">
+      <label for="materno">Apellido materno</label>
+      <input id="materno" name="materno" type="text">
+      <small class="error"></small>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Contacto</legend>
+    <div class="campo">
+      <label for="telefono">Teléfono</label>
+      <input id="telefono" name="telefono" type="tel" inputmode="numeric" maxlength="10">
+      <small class="error"></small>
+    </div>
+    <div class="campo">
+      <label for="celular">Celular</label>
+      <input id="celular" name="celular" type="tel" inputmode="numeric" maxlength="10">
+      <small class="error"></small>
+    </div>
+    <div class="campo full">
+      <label for="correo">Correo</label>
+      <input id="correo" name="correo" type="email">
+      <small class="error"></small>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Trámite</legend>
+    <div class="campo full">
+      <label for="nivel_id">Nivel al que desea ingresar o que ya cursa el alumno</label>
+      <select id="nivel_id" name="nivel_id">
+        <option value="">Selecciona</option>
+        {% for n in niveles %}<option value="{{ n.id }}">{{ n.nombre }}</option>{% endfor %}
+      </select>
+      <small class="error"></small>
+    </div>
+    <div class="campo full">
+      <label for="municipio_id">Municipio donde desea estudie el alumno</label>
+      <select id="municipio_id" name="municipio_id">
+        <option value="">Selecciona</option>
+        {% for m in municipios %}<option value="{{ m.id }}">{{ m.nombre }}</option>{% endfor %}
+      </select>
+      <small class="error"></small>
+    </div>
+    <div class="campo full">
+      <label for="asunto_id">Asunto a tratar</label>
+      <select id="asunto_id" name="asunto_id">
+        <option value="">Selecciona</option>
+        {% for a in asuntos %}<option value="{{ a.id }}">{{ a.nombre }}</option>{% endfor %}
+      </select>
+      <small class="error"></small>
+    </div>
+  </fieldset>
+</form>
