@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block titulo %}{{ titulo }}{% endblock %}
+{% block content %}
+<section class="card" id="catalogo" data-tipo="{{ tipo }}">
+  <header class="card-head"><h1>Catálogo: {{ titulo }}</h1></header>
+  <form id="form-nuevo" class="buscar" novalidate>
+    <div class="campo">
+      <label for="nombre">Nuevo registro</label>
+      <input id="nombre" type="text" maxlength="100">
+    </div>
+    <button type="submit" class="principal">Agregar</button>
+  </form>
+  <div class="tabla-wrap">
+    <table>
+      <thead><tr><th>Nombre</th><th>Solicitudes</th><th>Acciones</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/catalogo.js') }}"></script>
+{% endblock %}
