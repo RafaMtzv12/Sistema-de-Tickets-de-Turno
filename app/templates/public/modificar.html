@@ -16,6 +16,13 @@
       <label for="b-turno">Número de turno</label>
       <input id="b-turno" type="text" inputmode="numeric" maxlength="6">
     </div>
+    <div class="campo">
+      <label for="b-municipio">Municipio</label>
+      <select id="b-municipio">
+        <option value="">Selecciona</option>
+        {% for m in municipios %}<option value="{{ m.id }}">{{ m.nombre }}</option>{% endfor %}
+      </select>
+    </div>
     <button type="submit" class="principal">Buscar</button>
   </form>
 

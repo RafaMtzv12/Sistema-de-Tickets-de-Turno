@@ -14,10 +14,13 @@ class ModificarPage {
   async buscar(e) {
     e.preventDefault();
     const curp = Dom.id("b-curp").value.trim(), turno = Dom.id("b-turno").value.trim();
+    const municipio_id = Dom.id("b-municipio").value;
     if (!TicketForm.CURP.test(curp)) { Notificador.mostrar("Escribe una CURP válida", "error"); return; }
     if (!turno) { Notificador.mostrar("Escribe tu número de turno", "error"); return; }
 
-    const r = await ApiClient.post("/api/v1/tickets/buscar", { curp, turno });
+    if (!municipio_id) { Notificador.mostrar("Selecciona el municipio", "error"); return; }
+
+    const r = await ApiClient.post("/api/v1/tickets/buscar", { curp, turno, municipio_id });
     if (!r.ok) { Notificador.mostrar(r.data?.error || "No encontrado", "error"); return; }
 
     this.token = r.data.token;

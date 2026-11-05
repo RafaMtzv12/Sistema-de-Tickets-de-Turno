@@ -69,9 +69,14 @@ class BuscarAPI(MethodView):
             turno = int(d.get("turno"))
         except (TypeError, ValueError):
             raise ApiError("Turno inválido", 422)
-        t = Ticket.query.filter_by(curp=str(d.get("curp", "")).strip().upper(), turno=turno).first()
+        try:
+            municipio_id = int(d.get("municipio_id"))
+        except (TypeError, ValueError):
+            raise ApiError("Municipio inválido", 422)
+        t = Ticket.query.filter_by(curp=str(d.get("curp", "")).strip().upper(),
+                                   turno=turno, municipio_id=municipio_id).first()
         if not t:
-            raise ApiError("No se encontró una solicitud con esa CURP y turno", 404)
+            raise ApiError("No se encontró una solicitud con esa CURP, turno y municipio", 404)
         return jsonify(ticket=t.to_dict(), token=TokenService.generar(t))
 
 
