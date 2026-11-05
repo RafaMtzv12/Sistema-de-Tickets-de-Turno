@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block titulo %}Solicitar turno{% endblock %}
+{% block content %}
+<section class="card">
+  <header class="card-head">
+    <h1>Ticket de Turno</h1>
+    <span class="turno" id="turno">–</span>
+  </header>
+
+  <div id="bloque-form">
+    {% include "_form_ticket.html" %}
+    <div class="centro">
+      <button type="submit" form="form-ticket" id="btn-generar" class="principal">Generar turno</button>
+    </div>
+  </div>
+
+  <div id="resultado" hidden>
+    <h2>¡Solicitud registrada!</h2>
+    <dl>
+      <dt>Turno</dt><dd id="r-turno"></dd>
+      <dt>Municipio</dt><dd id="r-municipio"></dd>
+      <dt>Asunto</dt><dd id="r-asunto"></dd>
+      <dt>CURP</dt><dd id="r-curp"></dd>
+    </dl>
+    <p class="nota">Guarda tu CURP y tu número de turno: los necesitas si quieres modificar tu solicitud.</p>
+    <div class="acciones">
+      <a id="r-pdf" class="boton principal" target="_blank">Descargar comprobante PDF</a>
+      <button type="button" id="btn-nuevo">Nueva solicitud</button>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/ticket_form.js') }}"></script>
+<script src="{{ url_for('static', filename='js/solicitud.js') }}"></script>
+{% endblock %}

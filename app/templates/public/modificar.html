@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block titulo %}Modificar turno{% endblock %}
+{% block content %}
+<section class="card">
+  <header class="card-head">
+    <h1>Modificar solicitud</h1>
+    <span class="turno" id="turno">–</span>
+  </header>
+
+  <form id="form-buscar" class="buscar" novalidate>
+    <div class="campo">
+      <label for="b-curp">CURP</label>
+      <input id="b-curp" type="text" maxlength="18">
+    </div>
+    <div class="campo">
+      <label for="b-turno">Número de turno</label>
+      <input id="b-turno" type="text" inputmode="numeric" maxlength="6">
+    </div>
+    <button type="submit" class="principal">Buscar</button>
+  </form>
+
+  <div id="edicion" hidden>
+    {% include "_form_ticket.html" %}
+    <p class="nota">La CURP y el municipio no se pueden modificar.</p>
+    <div class="centro">
+      <button type="submit" form="form-ticket" class="principal">Guardar cambios</button>
+    </div>
+  </div>
+
+  <div id="resultado" hidden>
+    <h2>Solicitud actualizada</h2>
+    <div class="acciones">
+      <a id="r-pdf" class="boton principal" target="_blank">Descargar comprobante PDF</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/ticket_form.js') }}"></script>
+<script src="{{ url_for('static', filename='js/modificar.js') }}"></script>
+{% endblock %}

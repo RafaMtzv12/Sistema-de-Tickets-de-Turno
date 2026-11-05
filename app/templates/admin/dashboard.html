@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block titulo %}Dashboard{% endblock %}
+{% block content %}
+<section class="card">
+  <header class="card-head">
+    <h1>Dashboard</h1>
+    <div class="filtros">
+      <div class="modo">
+        <label><input type="radio" name="modo" value="total" checked> Total de solicitudes</label>
+        <label><input type="radio" name="modo" value="municipio"> Por municipio</label>
+      </div>
+      <div class="campo filtro">
+        <label for="filtro-mun">Municipio</label>
+        <select id="filtro-mun" disabled>
+          {% for m in municipios %}<option value="{{ m.id }}">{{ m.nombre }}</option>{% endfor %}
+        </select>
+      </div>
+    </div>
+  </header>
+  <p class="nota" id="vista-actual">Mostrando: total de solicitudes</p>
+  <div class="kpis">
+    <div class="kpi"><span id="k-total">0</span>Total</div>
+    <div class="kpi pend"><span id="k-pend">0</span>Pendientes</div>
+    <div class="kpi res"><span id="k-res">0</span>Resueltas</div>
+  </div>
+  <div class="graficas">
+    <div class="grafica"><canvas id="g-estatus"></canvas></div>
+    <div class="grafica"><canvas id="g-municipios"></canvas></div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/chart.umd.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}
